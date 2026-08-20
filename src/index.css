@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #0F1412;
+    color: #E2E8F0;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Geometric custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0F1412;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D3748;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10B981;
+}
