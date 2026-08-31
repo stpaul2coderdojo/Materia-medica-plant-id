@@ -1,6 +1,6 @@
 {
   "name": "FloraMedica: Plant ID & Traditional Pharmacopoeia",
-  "description": "Offline plant identification and ethnomedicine database with camera stream scanner, medicinal taxonomy (Siddha, Sowa-Rigpa, Ayurveda), edibility safety index, interactive 3D plant morphology, and digitised academic repository pointers.",
+  "description": "Offline plant identification and ethnomedicine database with camera stream scanner, user feedback and taxonomic ground-truth verification mechanism for AI model fine-tuning, medicinal taxonomy (Siddha, Sowa-Rigpa, Ayurveda), edibility safety index, interactive 3D plant morphology, and digitised academic repository pointers.",
   "requestFramePermissions": ["camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

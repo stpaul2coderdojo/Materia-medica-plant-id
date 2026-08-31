@@ -4,7 +4,8 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
   {
     id: "phyllanthus-emblica",
     scientificName: "Phyllanthus emblica L. (syn. Emblica officinalis)",
-    commonNames: ["Amla", "Indian Gooseberry", "Emblic", "Nelli", "sKyu-ru-ra"],
+    commonNames: ["Amla", "Indian Gooseberry", "Emblic", "Usiri", "sKyu-ru-ra"],
+    teluguName: "ఉసిరి (Usiri / Usirikaya)",
     tamilName: "நெல்லி (Nelli)",
     tibetanName: "སྐྱུ་རུ་ར་ (sKyu-ru-ra)",
     sanskritName: "आमलकी (Amalaki / Dhatri)",
@@ -50,7 +51,7 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
         vibagham: "Inippu",
         drugOriginClassification: "Seed Drug Origin",
         plantPartUsed: ["Fruit", "Seeds", "Bark"],
-        formulations: ["Nellikai Legiyam", "Triphala Chooranam (core ingredient)", "Nellikai Thylam"],
+        formulations: ["ఉసిరికాయ లేహ్యం (Usirikaya Legiyam)", "త్రిఫల చూర్ణం (Triphala Chooranam: ఉసిరి + కరక్కాయ + తానికాయ)", "ఉసిరి తైలం (Usiri Thailam)"],
         clinicalUses: "The foremost Kayakalpa fruit in Siddha heritage, gifted by King Adhiyaman to the saint-poetess Avvaiyar for immortality and radiant longevity.",
       },
       sowaRigpa: {
@@ -121,7 +122,8 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
   {
     id: "nelumbo-nucifera",
     scientificName: "Nelumbo nucifera Gaertn.",
-    commonNames: ["Sacred Lotus", "Indian Lotus", "Thamarai", "Padma", "Kamala"],
+    commonNames: ["Sacred Lotus", "Indian Lotus", "Tamara", "Padma", "Kamala"],
+    teluguName: "తామర (Tamara / Erra Tamara)",
     tamilName: "தாமரை (Thamarai)",
     tibetanName: "པདྨ་ (Pad-ma / Chu-skyes)",
     sanskritName: "पद्म (Padma / Kamala)",
@@ -173,7 +175,7 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
         vibagham: "Inippu",
         drugOriginClassification: "Flower Drug Origin",
         plantPartUsed: ["Petals & Stamens (Flower Drug Origin)", "Seeds (Seed Drug Origin)", "Rhizome"],
-        formulations: ["Thamarai Poo Manappagu (Floral Heart Syrup)", "Thamarai Vithai Chooranam", "Thamarai Nei"],
+        formulations: ["తామర పూల మణపాగు (Tamara Poola Manappagu: Floral Heart Syrup)", "తామర గింజల చూర్ణం (Tamara Ginjala Chooranam)", "తామర నెయ్యి (Tamara Ghee / Nei)"],
         clinicalUses: "Primary Flower and Seed Drug Origin in Siddha literature. Cures palpitations, anxiety tremors, excessive bodily heat, and strengthens heart musculature.",
       },
       sowaRigpa: {
@@ -244,7 +246,8 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
   {
     id: "cuminum-cyminum",
     scientificName: "Cuminum cyminum L.",
-    commonNames: ["Cumin", "Jeera", "Seeragam", "Zi-ra", "Jiraka"],
+    commonNames: ["Cumin", "Jeera", "Jeelakarra", "Zi-ra", "Jiraka"],
+    teluguName: "జీలకర్ర (Jeelakarra)",
     tamilName: "சீரகம் (Seeragam - Seer + Agam: Calms internal organs)",
     tibetanName: "ཟི་ར་དཀར་པོ་ (Zi-ra dKar-po / White Cumin)",
     sanskritName: "जीरक (Jiraka / Deepana)",
@@ -290,8 +293,8 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
         vibagham: "Inippu",
         drugOriginClassification: "Seed Drug Origin",
         plantPartUsed: ["Dried Seeds"],
-        formulations: ["Seeraga Chooranam", "Seeraga Kudineer (Daily Cumin Water)", "Seeraga Nei"],
-        clinicalUses: "Etymology in Tamil: 'Seer' (to harmonize/beautify) + 'Agam' (internal body). Calms acid reflux, expels stomach gas, stops colic spasms, and purifies mother's milk.",
+        formulations: ["జీలకర్ర చూర్ణం (Jeelakarra Chooranam)", "జీలకర్ర కషాయం / నీళ్ళు (Jeelakarra Neellu)", "జీలకర్ర ఘృతం (Jeelakarra Ghritam)"],
+        clinicalUses: "Harmonizes and regulates internal visceral balance. Calms acid reflux, expels stomach gas, stops colic spasms, and purifies mother's milk.",
       },
       sowaRigpa: {
         ro: "Tsha-ba (Pungent) and Kha-ba (Bitter)",
@@ -361,7 +364,8 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
   {
     id: "datura-metel",
     scientificName: "Datura metel L.",
-    commonNames: ["Devil's Trumpet", "Thorn Apple", "Oomathai", "Dha-dhu-ra", "Dhattura"],
+    commonNames: ["Devil's Trumpet", "Thorn Apple", "Ummettha", "Dha-dhu-ra", "Dhattura"],
+    teluguName: "ఉమ్మెత్త (Ummettha / Nalla Ummettha)",
     tamilName: "ஊமத்தை (Oomathai)",
     tibetanName: "དྷ་དྷུ་ར་ (Dha-dhu-ra)",
     sanskritName: "धत्तूर (Dhattura / Kanaka)",
@@ -415,7 +419,7 @@ export const EXTRA_OFFLINE_PLANTS: PlantData[] = [
         vibagham: "Kaarpu",
         drugOriginClassification: "Flower Drug Origin",
         plantPartUsed: ["Purified Seeds", "Leaves (External application only)"],
-        formulations: ["Oomathai Thylam (External analgesic oil for chronic arthritis)", "Kanakaasavam (Classical pharmaceutical under prescription)"],
+        formulations: ["ఉమ్మెత్త తైలం (Ummettha Thailam: External analgesic oil for chronic arthritis)", "కనకాసవం (Kanakasavam: Classical pharmaceutical under prescription)"],
         clinicalUses: "Used strictly externally in Siddha medicine for chronic joint pain, rheumatic swellings, and inflammatory boils. Never administered raw.",
       },
       sowaRigpa: {

@@ -4,7 +4,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "centella-asiatica",
     scientificName: "Centella asiatica (L.) Urb.",
-    commonNames: ["Gotu Kola", "Indian Pennywort", "Asiatic Pennywort", "Mandukaparni", "Vallarai"],
+    commonNames: ["Gotu Kola", "Indian Pennywort", "Asiatic Pennywort", "Mandukaparni", "Saraswathi Aaku"],
+    teluguName: "సరస్వతీ ఆకు / బ్రహ్మి (Saraswathi Aaku / Brahmi)",
     tamilName: "வல்லாரை (Vallarai)",
     tibetanName: "བྲ་མ་ (Brah-ma / Khrom-bu-shing)",
     sanskritName: "मण्डूकपर्णी (Mandukaparni)",
@@ -57,8 +58,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Inippu (Sweet metabolic conversion)",
         drugOriginClassification: "Leaf Drug Origin",
         plantPartUsed: ["Fresh Leaves", "Whole Herb"],
-        formulations: ["Vallarai Nei (Medicated Ghee)", "Vallarai Chooranam", "Vallarai Legiyam"],
-        clinicalUses: "Premier brain rejuvenator (Gnana Marundhu), restores memory retention, cures speech disorders in children, heals gastric ulcers, and purifies blood.",
+        formulations: ["సరస్వతీ ఆకు ఘృతం (Saraswathi Aaku Ghritam)", "బ్రహ్మి చూర్ణం (Brahmi Chooranam)", "సరస్వతీ లేహ్యం (Saraswathi Legiyam)"],
+        clinicalUses: "Premier brain rejuvenator (Gnana Rasayana / Medhya) in traditional South Indian Siddha practice. Restores memory retention, sharpens mental cognition, heals gastric ulcers, and purifies blood.",
       },
       sowaRigpa: {
         ro: "Kha-ba (Bitter) and mNgar-ba (Sweet)",
@@ -134,7 +135,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "ocimum-sanctum",
     scientificName: "Ocimum tenuiflorum L. (syn. Ocimum sanctum)",
-    commonNames: ["Holy Basil", "Tulsi", "Sacred Basil", "Krishna Tulsi", "Thulasi"],
+    commonNames: ["Holy Basil", "Tulsi", "Sacred Basil", "Krishna Tulsi", "Thulasi Chettu"],
+    teluguName: "తులసి (Tulasi / Thulasi Chettu)",
     tamilName: "துளசி (Thulasi)",
     tibetanName: "ཏུ་ལ་སི་ (Tu-la-si / Dza-ti-phram)",
     sanskritName: "तुलसी (Tulasi)",
@@ -187,8 +189,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Kaarpu (Pungent transformation)",
         drugOriginClassification: "Leaf Drug Origin",
         plantPartUsed: ["Leaves", "Root", "Inflorescence", "Seeds"],
-        formulations: ["Thulasi Chooranam", "Thulasi Thylam", "Kabasura Kudineer (co-ingredient)"],
-        clinicalUses: "Primary remedy for viral fevers, bronchial spasms, Sinusitis, chronic asthma, toxic fevers, and vital energy rejuvenation.",
+        formulations: ["తులసి తీర్థం (Tulasi Theertham)", "తులసి తైలం (Tulasi Thailam)", "తులసి కషాయం (Tulasi Kashayam)"],
+        clinicalUses: "Siddha panacea for respiratory ailments, relieves chest phlegm, soothes intermittent fevers, and detoxifies insect stings.",
       },
       sowaRigpa: {
         ro: "Tsha-ba (Pungent) and Kha-ba (Bitter)",
@@ -263,7 +265,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "terminalia-chebula",
     scientificName: "Terminalia chebula Retz.",
-    commonNames: ["Haritaki", "Chebulic Myrobalan", "King of Medicines", "Kadukkai", "A-ru-ra"],
+    commonNames: ["Haritaki", "Chebulic Myrobalan", "King of Medicines", "Karakkaya", "A-ru-ra"],
+    teluguName: "కరక్కాయ (Karakkaya)",
     tamilName: "கடுக்காய் (Kadukkai)",
     tibetanName: "ཨ་རུ་ར་ (A-ru-ra / King of All Medicinal Plants)",
     sanskritName: "हरीतकी (Haritaki / Abhaya)",
@@ -316,8 +319,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Inippu (Sweet transformative essence)",
         drugOriginClassification: "Seed Drug Origin",
         plantPartUsed: ["Fruit Rind (Pericarp)", "Seed Extract"],
-        formulations: ["Kadukkai Maathirai", "Thirikadugu Chooranam", "Kadukkai Thylam"],
-        clinicalUses: "Exalted in Siddha verse: 'Kadukkai protects the body like an affectionate mother.' Dissolves deep intestinal toxins (Amam), purifies blood, and prevents grey hair.",
+        formulations: ["కరక్కాయ చూర్ణం (Karakkaya Chooranam)", "త్రిఫల చూర్ణం (Triphala Chooranam)", "కరక్కాయ లేహ్యం (Karakkaya Legiyam)"],
+        clinicalUses: "Exalted in traditional Siddha verse: 'Karakkaya protects the body like an affectionate mother.' Dissolves deep intestinal toxins (Amam), purifies blood, and preserves longevity (Kayakalpa).",
       },
       sowaRigpa: {
         ro: "Possesses all tastes except salty (mNgar, sKyur, Kha, Tsha, bsKa)",
@@ -392,7 +395,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "withania-somnifera",
     scientificName: "Withania somnifera (L.) Dunal",
-    commonNames: ["Ashwagandha", "Indian Ginseng", "Winter Cherry", "Amukkara", "Asgandh"],
+    commonNames: ["Ashwagandha", "Indian Ginseng", "Winter Cherry", "Aswagandha", "Penneru Gadda"],
+    teluguName: "అశ్వగంధ / పెన్నేరు గడ్డ (Ashwagandha / Penneru Gadda)",
     tamilName: "அமுக்கரா (Amukkara)",
     tibetanName: "ཨ་ཤྭ་གན་དྷ་ (A-shwa-gan-dha / rTa-gzhog-pa)",
     sanskritName: "अश्वगन्धा (Ashwagandha)",
@@ -451,8 +455,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Inippu (Sweet transformation)",
         drugOriginClassification: "Root Drug Origin",
         plantPartUsed: ["Root (Tuberous taproot)"],
-        formulations: ["Amukkara Chooranam", "Amukkara Legiyam", "Amukkara Thylam"],
-        clinicalUses: "Legendary aphrodisiac and nerve tonic in Siddha practice. Gives horse-like vigor (Amukkara / Ashwa), resolves hemiplegia, insomnia, chronic joint pains, and physical wasting.",
+        formulations: ["అశ్వగంధ చూర్ణం (Ashwagandha Chooranam)", "పెన్నేరు లేహ్యం (Penneru Legiyam)", "అశ్వగంధ తైలం (Ashwagandha Thailam)"],
+        clinicalUses: "Legendary aphrodisiac and nerve tonic in Siddha practice. Gives horse-like vigor (Aswagandha / Penneru Gadda), resolves hemiplegia, insomnia, chronic joint pains, and physical wasting.",
       },
       sowaRigpa: {
         ro: "mNgar-ba (Sweet) and Tsha-ba (Pungent)",
@@ -528,7 +532,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "adhatoda-vasica",
     scientificName: "Justicia adhatoda L. (syn. Adhatoda vasica)",
-    commonNames: ["Malabar Nut", "Vasaka", "Adathodai", "Ba-sha-ka", "Aduso"],
+    commonNames: ["Malabar Nut", "Vasaka", "Addasaram", "Ba-sha-ka", "Aduso"],
+    teluguName: "అడ్డసరం (Addasaram)",
     tamilName: "ஆடாதோடை (Adathodai)",
     tibetanName: "བ་ཤ་ཀ་ (Ba-sha-ka / White Vasaka)",
     sanskritName: "वासा (Vasa / Vasaka)",
@@ -581,7 +586,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Kaarpu (Pungent transformative action)",
         drugOriginClassification: "Leaf Drug Origin",
         plantPartUsed: ["Fresh Leaves", "Flowers", "Roots"],
-        formulations: ["Adathodai Manappagu (Herbal Syrup)", "Adathodai Kudineer", "Adathodai Nei"],
+        formulations: ["అడ్డసరం పానకం / సిరప్ (Addasaram Syrup)", "అడ్డసరం కషాయం (Addasaram Kashayam)", "అడ్డసరం తైలం (Addasaram Thailam)"],
         clinicalUses: "The crown jewel for pulmonary medicine in Siddha. Reverses whooping cough, chronic bronchitis, sputum stagnation, and pulmonary bleeding.",
       },
       sowaRigpa: {
@@ -658,7 +663,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "hibiscus-rosa-sinensis",
     scientificName: "Hibiscus rosa-sinensis L.",
-    commonNames: ["Shoeblackplant", "China Rose", "Sembaruthi", "Chembarathi", "Japa"],
+    commonNames: ["Shoeblackplant", "China Rose", "Mandara", "Dasanamu", "Japa"],
+    teluguName: "మందార / దాసనము (Mandara / Dasanamu)",
     tamilName: "செம்பருத்தி (Sembaruthi)",
     tibetanName: "རྒྱ་སྐྱེགས་མེ་ཏོག་ (rGya-skyegs Me-tog)",
     sanskritName: "जपा पुष्प (Japa Pushpa)",
@@ -681,7 +687,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
       ratingScore: 92,
       isSafeForHumanConsumption: true,
       edibleParts: ["Fresh Petals", "Flower Buds", "Tender Young Leaves"],
-      culinaryUses: "Infused into vibrant ruby-red antioxidant herbal teas (Hibiscus Agua de Jamaica / Sembaruthi Tea), candied into desserts, added to raw floral salads, and cooked in cooling sour chutneys.",
+      culinaryUses: "Infused into vibrant ruby-red antioxidant herbal teas (Hibiscus Agua de Jamaica / Mandara Tea), candied into desserts, added to raw floral salads, and cooked in cooling sour chutneys.",
       preparationNotes: "Remove the central stamen column and green calyx; steep petals in boiling water for 5-7 minutes. Imparts bright tangy-sweet flavor.",
       safetyWarnings: [
         "Mild hypotensive effect: monitor blood pressure if consuming large amounts with antihypertensive medications.",
@@ -711,8 +717,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Inippu (Sweet transmutation)",
         drugOriginClassification: "Flower Drug Origin",
         plantPartUsed: ["Fresh Flowers", "Flower Buds", "Leaves"],
-        formulations: ["Sembaruthi Thylam (Hair Oil)", "Sembaruthi Manappagu", "Sembaruthi Chooranam"],
-        clinicalUses: "Prime Flower Drug Origin monograph in Siddha. Revitalizes coronary circulation, stops cardiac palpitations, eliminates premature grey hair, and enhances uterine tone.",
+        formulations: ["మందార తైలం (Mandara Thailam / Hair Oil)", "మందార పానకం (Mandara Floral Syrup)", "మందార చూర్ణం (Mandara Chooranam)"],
+        clinicalUses: "Prime Flower Drug Origin monograph in Siddha. Revitalizes coronary circulation, stops cardiac palpitations, eliminates premature grey hair, and enhances hair follicle health.",
       },
       sowaRigpa: {
         ro: "mNgar-ba (Sweet) and bsKa-ba (Astringent)",
@@ -787,7 +793,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "piper-nigrum",
     scientificName: "Piper nigrum L.",
-    commonNames: ["Black Pepper", "King of Spices", "Milagu", "Na-le-sham", "Maricha"],
+    commonNames: ["Black Pepper", "King of Spices", "Miriyaalu", "Na-le-sham", "Maricha"],
+    teluguName: "మిరియాలు (Miriyaalu)",
     tamilName: "மிளகு (Milagu)",
     tibetanName: "ན་ལེ་ཤམ་ (Na-le-sham / Maricha)",
     sanskritName: "मरिच (Maricha)",
@@ -840,8 +847,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Kaarpu (Pungent transformation)",
         drugOriginClassification: "Seed Drug Origin",
         plantPartUsed: ["Dried Berries / Seeds"],
-        formulations: ["Thirikadugu Chooranam (Milagu + Thippili + Chukku)", "Milagu Kuzhambu", "Milagu Thylam"],
-        clinicalUses: "Celebrated in Siddha proverb: 'Even in the home of an enemy, consume food safely with ten grains of Milagu.' Supreme antitoxin, destroys intestinal worms, and kindles metabolic energy.",
+        formulations: ["త్రికటుక చూర్ణం (Trikatu Chooranam: మిరియాలు + పిప్పళ్ళు + శొంఠి)", "మిరియాల చారు (Miriyala Chaaru / Rasam)", "మిరియాల తైలం (Miriyaala Thailam)"],
+        clinicalUses: "Celebrated in Siddha proverb: 'Even in the home of an enemy, consume food safely with ten grains of Milagu/Miriyaalu.' Supreme antitoxin, destroys intestinal parasites, and kindles metabolic energy.",
       },
       sowaRigpa: {
         ro: "Tsha-ba (Pungent)",
@@ -916,7 +923,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "catharanthus-roseus",
     scientificName: "Catharanthus roseus (L.) G.Don (syn. Vinca rosea)",
-    commonNames: ["Madagascar Periwinkle", "Rosy Periwinkle", "Nithyakalyani", "Sadabahar"],
+    commonNames: ["Madagascar Periwinkle", "Rosy Periwinkle", "Billa Ganneru", "Sadabahar"],
+    teluguName: "బిళ్ళ గన్నేరు (Billa Ganneru)",
     tamilName: "நித்யகல்யாணி (Nithyakalyani)",
     tibetanName: "པདྨ་དམར་པོའི་རྩྭ་ (Pad-ma dMar-po'i rTswa)",
     sanskritName: "सदाबहार (Sadabahar)",
@@ -969,7 +977,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Kaarpu (Pungent)",
         drugOriginClassification: "Flower Drug Origin",
         plantPartUsed: ["Purified Leaves (Folk Siddha)", "Root Bark", "Isolated Alkaloids"],
-        formulations: ["Nithyakalyani Kudineer (Strictly under qualified Siddha medical supervision)"],
+        formulations: ["బిళ్ళ గన్నేరు కషాయం (Billa Ganneru Kashayam - strictly under supervision)"],
         clinicalUses: "Employed in traditional Siddha oncology formulations and severe non-healing diabetic wound washes.",
       },
       sowaRigpa: {
@@ -1041,7 +1049,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "moringa-oleifera",
     scientificName: "Moringa oleifera Lam.",
-    commonNames: ["Moringa", "Drumstick Tree", "Miracle Tree", "Murungai", "Shigru"],
+    commonNames: ["Moringa", "Drumstick Tree", "Miracle Tree", "Munaga", "Shigru"],
+    teluguName: "మునగ (Munaga / Munaga Chettu)",
     tamilName: "முருங்கை (Murungai)",
     tibetanName: "ཤིག་རུ་ (Shig-ru)",
     sanskritName: "शिग्रु (Shigru / Sobhanjana)",
@@ -1064,7 +1073,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
       ratingScore: 99,
       isSafeForHumanConsumption: true,
       edibleParts: ["Leaves (Superfood)", "Pods / Drumsticks (Cooked)", "Flowers (Cooked)", "Seeds (Cold-pressed Ben oil / Roasted)"],
-      culinaryUses: "Renowned superfood consumed in South Indian Sambar, stir-fried greens (Murungai Keerai Poriyal), drumstick soups, dried leaf tea powders, and pressed seed edible oil.",
+      culinaryUses: "Renowned superfood consumed in South Indian Sambar, stir-fried greens (Munagaku Vepudu), drumstick curries, dried leaf tea powders, and pressed seed edible oil.",
       preparationNotes: "Leaves can be dried at low temperatures into dense nutritional powder (rich in Vitamin C, Iron, Calcium, and all 9 essential amino acids).",
       safetyWarnings: [
         "Root bark contains high spirochin alkaloid concentrations and should not be consumed internally during pregnancy.",
@@ -1087,7 +1096,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Kaarpu",
         drugOriginClassification: "Flower Drug Origin",
         plantPartUsed: ["Leaves", "Flowers", "Seeds", "Pods"],
-        formulations: ["Murungai Pookkal Legiyam", "Murungai Vithai Chooranam", "Murungai Thylam"],
+        formulations: ["మునగ పూల లేహ్యం (Munaga Poola Legiyam)", "మునగ విత్తనాల చూర్ణం (Munaga Vithanaala Chooranam)", "మునగ తైలం (Munaga Thailam)"],
         clinicalUses: "Premier aphrodisiac, boosts male sperm motility, enhances maternal lactation, resolves chronic anemia, and builds physical stamina.",
       },
       sowaRigpa: {
@@ -1163,7 +1172,8 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
   {
     id: "tinospora-cordifolia",
     scientificName: "Tinospora cordifolia (Willd.) Miers",
-    commonNames: ["Guduchi", "Giloy", "Amrita (Nectar of Immortality)", "Seenthil", "Sle-tres"],
+    commonNames: ["Guduchi", "Giloy", "Amrita (Nectar of Immortality)", "Tippa Teega", "Sle-tres"],
+    teluguName: "తిప్ప తీగ (Tippa Teega)",
     tamilName: "சீந்தில் (Seenthil)",
     tibetanName: "སླེ་ཏྲེས་ (Sle-tres / Amrita)",
     sanskritName: "गुडूची (Guduchi / Amrita)",
@@ -1215,7 +1225,7 @@ export const OFFLINE_PLANT_DATABASE: PlantData[] = [
         vibagham: "Inippu",
         drugOriginClassification: "Leaf Drug Origin",
         plantPartUsed: ["Fresh Stem", "Guduchi Satva (Starch)", "Leaves"],
-        formulations: ["Seenthil Kudineer", "Seenthil Sarkarai", "Kabasura Kudineer (core ingredient)"],
+        formulations: ["తిప్ప తీగ కషాయం (Tippa Teega Kashayam)", "తిప్ప తీగ సత్వం (Tippa Teega Satvam)", "కబసుర కుడినీరు (Kabasura Kudineer core constituent)"],
         clinicalUses: "Known as 'Kayakalpa' (longevity medicine) in Siddha. Renders the body resilient to seasonal epidemics, controls high blood sugar, and cleanses the lymphatic system.",
       },
       sowaRigpa: {

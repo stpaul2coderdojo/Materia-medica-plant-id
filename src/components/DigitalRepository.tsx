@@ -16,6 +16,9 @@ import {
   Maximize2,
   ChevronRight,
   Database,
+  Award,
+  Heart,
+  Scale,
 } from "lucide-react";
 import { PlantData } from "../types";
 import { FULL_BOTANICAL_DATABASE } from "../services/plantService";
@@ -69,6 +72,8 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
         n.toLowerCase().includes(searchQuery.toLowerCase())
       ) ||
         p.scientificName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.teluguName &&
+          p.teluguName.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (p.tamilName &&
           p.tamilName.toLowerCase().includes(searchQuery.toLowerCase())) ||
         p.digitisedRepository.siddhaPharmacopoeia.structuralLayout
@@ -307,7 +312,7 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
                     </div>
 
                     <h3 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors">
-                      {plant.commonNames[0]} ({plant.tamilName})
+                      {plant.commonNames[0]} ({plant.teluguName || plant.tamilName})
                     </h3>
 
                     <p className="text-xs text-amber-300/90 font-serif italic">
@@ -335,7 +340,7 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
                     <button
                       onClick={() =>
                         setActiveReaderItem({
-                          title: `${plant.commonNames[0]} (${plant.tamilName})`,
+                          title: `${plant.commonNames[0]} (${plant.teluguName || plant.tamilName})`,
                           subtitle: `${plant.scientificName} • ${sid.structuralLayout}`,
                           repoName: sid.networkOrigin,
                           pdfExtract: sid.monographSummary,
@@ -540,6 +545,43 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
           </div>
         </div>
       )}
+
+      {/* Institutional Authorship & Benevity Causes Contribution Card */}
+      <div className="p-4 sm:p-5 rounded-sm bg-[#141B19] border border-[#2D3748] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono">
+        <div className="space-y-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-bold text-white font-sans text-sm">
+              Dr. Bheemaiah Anil K
+            </span>
+            <span className="text-[10px] px-2 py-0.5 rounded-sm bg-[#1A2521] text-emerald-400 border border-emerald-500/30">
+              Mother Divine Inc., Seattle
+            </span>
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] px-2 py-0.5 rounded-sm bg-cyan-950/40 text-cyan-300 border border-cyan-500/30 hover:underline flex items-center gap-1"
+            >
+              <Scale className="w-3 h-3" /> CC BY-SA 4.0
+            </a>
+          </div>
+          <p className="text-[11px] text-slate-400 font-sans">
+            Digitised palm leaf manuscripts, Siddha treatises, Sowa-Rigpa pharmacopoeia and open scientific papers curated for global research access.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+          <a
+            href="https://causes.benevity.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-black font-bold uppercase tracking-tight text-[11px] rounded-sm flex items-center gap-1.5 transition-all shadow-sm"
+          >
+            <Heart className="w-3.5 h-3.5 fill-black" />
+            <span>Contribute via Benevity</span>
+          </a>
+        </div>
+      </div>
 
       {/* Digital Reader Modal Simulation */}
       {activeReaderItem && (
