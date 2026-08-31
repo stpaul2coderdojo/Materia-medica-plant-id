@@ -1,8 +1,7 @@
 # FloraMedica Pro
 
-[![arXiv](https://img.shields.io/badge/arXiv-2608.14920-B31B1B.svg)](docs/ARXIV_PAPER.md)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.5645731.fm2026-blue.svg)](https://doi.org/10.5281/zenodo.5645731)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22202177-blue.svg)](https://doi.org/10.5281/zenodo.22202177)
 
 **FloraMedica Pro** is an open-access, offline-first neural-pharmacopoeial synthesis system that integrates **Pl@ntNet Multi-Organ Vision (v2 REST API & NeurIPS 300K Benchmark)**, **Google Cloud Vision OCR**, and **Gemini 3.7 Flash / 3.1 Flash-Lite neural cascades** with classical **Siddha (Gunapadam)**, **Tibetan Sowa-Rigpa (rGyud-bZhi)**, and **Ayurvedic Materia Medica** for high-confidence botanical identification, toxic lookalike disambiguation, and edge field diagnostics.
 
@@ -19,8 +18,8 @@ The full camera-ready academic publication is documented in this repository:
 - **Title:** *FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics*
 - **Author:** **Dr. Bheemaiah Anil K** (`bheemaiah@alumni.iitm.ac.in`)
 - **Institution:** **Mother Divine Inc.**, Seattle, Washington, USA
-- **arXiv Identifier:** `arXiv:2608.14920 [cs.CV, q-bio.QM]`
-- **DOI:** `10.5281/zenodo.5645731.fm2026`
+- **Preprint Identifier:** `FloraMedica-2026 [cs.CV, q-bio.QM]`
+- **DOI:** [`10.5281/zenodo.22202177`](https://doi.org/10.5281/zenodo.22202177)
 - **Citation:** [BibTeX & Citation Instructions](docs/ARXIV_PAPER.md#14-bibtex--citation-formats)
 
 ---
@@ -111,11 +110,10 @@ npm start
 @article{anil2026floramedica,
   title={FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics},
   author={Anil K., Bheemaiah},
-  journal={arXiv preprint arXiv:2608.14920 [cs.CV, q-bio.QM]},
   year={2026},
   institution={Mother Divine Inc., Seattle, Washington, USA},
-  doi={10.5281/zenodo.5645731.fm2026},
-  url={https://github.com/motherdivine/floramedica-pro/blob/main/docs/ARXIV_PAPER.md}
+  doi={10.5281/zenodo.22202177},
+  url={https://doi.org/10.5281/zenodo.22202177}
 }
 ```
 

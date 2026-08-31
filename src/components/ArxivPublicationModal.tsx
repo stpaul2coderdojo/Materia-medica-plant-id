@@ -55,14 +55,13 @@ export const ArxivPublicationModal: React.FC<ArxivPublicationModalProps> = ({
   const bibtexCitation = `@article{anil2026floramedica,
   title={FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics},
   author={Anil K., Bheemaiah},
-  journal={arXiv preprint arXiv:2608.14920 [cs.CV, q-bio.QM]},
   year={2026},
   institution={Mother Divine Inc., Seattle, Washington, USA},
-  doi={10.5281/zenodo.5645731.fm2026},
-  url={https://floramedica.org/research/arxiv-2608.14920}
+  doi={10.5281/zenodo.22202177},
+  url={https://doi.org/10.5281/zenodo.22202177}
 }`;
 
-  const apaCitation = `Anil K., B. (2026). FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics. arXiv:2608.14920 [cs.CV, q-bio.QM]. Mother Divine Inc., Seattle, WA.`;
+  const apaCitation = `Anil K., B. (2026). FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics. Mother Divine Inc., Seattle, WA. DOI: 10.5281/zenodo.22202177.`;
 
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
@@ -228,9 +227,14 @@ export const ArxivPublicationModal: React.FC<ArxivPublicationModalProps> = ({
                   <span className="text-red-400 font-bold uppercase flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5" /> arXiv.org &gt; cs &gt; arXiv:2608.14920
                   </span>
-                  <span className="text-slate-400">
-                    Preprint date: 30 August 2026 • DOI: 10.5281/zenodo.5645731.fm2026
-                  </span>
+                  <a
+                    href="https://doi.org/10.5281/zenodo.22202177"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline flex items-center gap-1 font-semibold"
+                  >
+                    DOI: 10.5281/zenodo.22202177 <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
                 <div className="text-slate-300 text-[11px] flex flex-wrap gap-x-4 gap-y-1">
                   <span><strong>Primary Subject:</strong> Computer Vision (cs.CV)</span>

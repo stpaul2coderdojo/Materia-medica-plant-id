@@ -417,9 +417,14 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
                   Preprint • Open Access CC BY-SA 4.0
                 </span>
               </div>
-              <span className="text-slate-400 font-mono text-[11px]">
-                DOI: 10.5281/zenodo.5645731.fm2026
-              </span>
+              <a
+                href="https://doi.org/10.5281/zenodo.22202177"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:underline font-mono text-[11px] flex items-center gap-1 font-semibold"
+              >
+                DOI: 10.5281/zenodo.22202177 <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
 
             <h3 className="text-base sm:text-lg font-bold font-serif text-white leading-snug">

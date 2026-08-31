@@ -31,7 +31,7 @@ async function startServer() {
     });
   }
 
-  // Robust multi-model cascade with exponential jittered backoff for 503/429 handling
+  // Robust multi-model cascade with immediate failover for 503 high demand / 429 rate limits
   async function generateContentWithFallback(
     ai: GoogleGenAI,
     params: {
@@ -41,17 +41,18 @@ async function startServer() {
       maxRetriesPerModel?: number;
     }
   ): Promise<{ response: any; modelUsed: string }> {
+    // Ordered cascade: ultra-fast lightweight model first for resilience, followed by full flash & previews
     const models = params.candidateModels && params.candidateModels.length > 0
       ? params.candidateModels
-      : ["gemini-3.7-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"];
-    const maxRetries = params.maxRetriesPerModel ?? 2;
+      : ["gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-flash-latest", "gemini-2.5-flash"];
+    const maxRetries = params.maxRetriesPerModel ?? 1;
     let lastError: any = null;
 
     for (const modelName of models) {
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
           if (attempt > 0) {
-            const backoffMs = Math.min(2500, Math.floor(600 * Math.pow(2, attempt - 1) + Math.random() * 250));
+            const backoffMs = Math.min(1500, Math.floor(400 * Math.pow(2, attempt - 1) + Math.random() * 200));
             await new Promise((r) => setTimeout(r, backoffMs));
           }
           const response = await ai.models.generateContent({
@@ -66,14 +67,21 @@ async function startServer() {
           lastError = err;
           const msg = err?.message || String(err);
           console.warn(`[Gemini API] Model ${modelName} (attempt ${attempt + 1}/${maxRetries + 1}) note: ${msg.slice(0, 140)}`);
-          // If error is not transient (not 503/429/high demand/unavailable), move to next candidate model
-          if (
-            !msg.includes("503") &&
-            !msg.includes("429") &&
-            !msg.includes("UNAVAILABLE") &&
-            !msg.includes("high demand") &&
-            !msg.includes("Resource has been exhausted")
-          ) {
+
+          // If high demand (503) or service unavailable, do NOT delay on same model; immediately cascade to next candidate
+          const isHighDemand =
+            msg.includes("503") ||
+            msg.includes("high demand") ||
+            msg.includes("UNAVAILABLE") ||
+            msg.includes("overloaded");
+
+          if (isHighDemand) {
+            // Immediately fail over to next model in cascade
+            break;
+          }
+
+          // If non-retryable fatal error (e.g. 400 Bad Request / invalid argument), move to next model immediately
+          if (!msg.includes("429") && !msg.includes("Resource has been exhausted")) {
             break;
           }
         }
@@ -631,8 +639,8 @@ Return the response strictly adhering to the specified JSON schema.`;
 
       const { response } = await generateContentWithFallback(ai, {
         contents: { parts: [imagePart, textPart] },
-        candidateModels: ["gemini-3.7-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"],
-        maxRetriesPerModel: 2,
+        candidateModels: ["gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-flash-latest", "gemini-2.5-flash"],
+        maxRetriesPerModel: 1,
         config: {
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -920,8 +928,8 @@ Return strictly adhering to the JSON schema.`;
 
             const { response } = await generateContentWithFallback(ai, {
               contents: prompt,
-              candidateModels: ["gemini-3.7-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"],
-              maxRetriesPerModel: 2,
+              candidateModels: ["gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-flash-latest", "gemini-2.5-flash"],
+              maxRetriesPerModel: 1,
               config: {
                 responseMimeType: "application/json",
                 responseSchema: {
@@ -1287,8 +1295,8 @@ ${formattedHistory}`;
       try {
         const { response: chatResponse } = await generateContentWithFallback(ai, {
           contents: { parts },
-          candidateModels: ["gemini-3.7-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"],
-          maxRetriesPerModel: 2,
+          candidateModels: ["gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-flash-latest", "gemini-2.5-flash"],
+          maxRetriesPerModel: 1,
         });
 
         if (chatResponse && chatResponse.text) {

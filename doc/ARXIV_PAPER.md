@@ -1,7 +1,7 @@
 # FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics
 
-**arXiv Identifier:** [arXiv:2608.14920](https://arxiv.org/abs/2608.14920) `[cs.CV, q-bio.QM, cs.AI]`  
-**DOI:** [10.5281/zenodo.5645731.fm2026](https://doi.org/10.5281/zenodo.5645731)  
+**Preprint Identifier:** `FloraMedica-2026 [cs.CV, q-bio.QM, cs.AI]`  
+**DOI:** [10.5281/zenodo.22202177](https://doi.org/10.5281/zenodo.22202177)  
 **Preprint Date:** August 30, 2026  
 **License:** Open Access under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/)  
 **GitHub Repository File Path:** `docs/ARXIV_PAPER.md` and `doc/ARXIV_PAPER.md`
@@ -232,16 +232,15 @@ This research was conceived, formulated, and developed by **Dr. Bheemaiah Anil K
 @article{anil2026floramedica,
   title={FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics},
   author={Anil K., Bheemaiah},
-  journal={arXiv preprint arXiv:2608.14920 [cs.CV, q-bio.QM]},
   year={2026},
   institution={Mother Divine Inc., Seattle, Washington, USA},
-  doi={10.5281/zenodo.5645731.fm2026},
-  url={https://github.com/motherdivine/floramedica-pro/blob/main/docs/ARXIV_PAPER.md}
+  doi={10.5281/zenodo.22202177},
+  url={https://doi.org/10.5281/zenodo.22202177}
 }
 ```
 
 ### APA Format
-> Anil K., B. (2026). *FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics*. arXiv:2608.14920 [cs.CV, q-bio.QM]. Mother Divine Inc., Seattle, WA. DOI: 10.5281/zenodo.5645731.fm2026.
+> Anil K., B. (2026). *FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics*. Mother Divine Inc., Seattle, WA. DOI: [10.5281/zenodo.22202177](https://doi.org/10.5281/zenodo.22202177).
 
 ---
 
