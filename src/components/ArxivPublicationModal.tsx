@@ -223,10 +223,10 @@ export const ArxivPublicationModal: React.FC<ArxivPublicationModalProps> = ({
           >
             <div className="max-w-4xl mx-auto space-y-8 font-sans">
               {/* ArXiv Header Banner Box */}
-              <div className="bg-[#141C19] border border-[#2D3748] rounded-sm p-4 sm:p-6 text-xs font-mono space-y-2">
+              <div className="bg-[#141C19] border border-[#2D3748] rounded-sm p-4 sm:p-6 text-xs font-mono space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#25322E] pb-2 text-[11px]">
-                  <span className="text-red-400 font-bold uppercase">
-                    arXiv.org &gt; cs &gt; arXiv:2608.14920
+                  <span className="text-red-400 font-bold uppercase flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5" /> arXiv.org &gt; cs &gt; arXiv:2608.14920
                   </span>
                   <span className="text-slate-400">
                     Preprint date: 30 August 2026 • DOI: 10.5281/zenodo.5645731.fm2026
@@ -235,6 +235,51 @@ export const ArxivPublicationModal: React.FC<ArxivPublicationModalProps> = ({
                 <div className="text-slate-300 text-[11px] flex flex-wrap gap-x-4 gap-y-1">
                   <span><strong>Primary Subject:</strong> Computer Vision (cs.CV)</span>
                   <span><strong>Secondary Subjects:</strong> Quantitative Biology - Quantitative Methods (q-bio.QM); Artificial Intelligence (cs.AI)</span>
+                </div>
+
+                {/* GitHub Repository Paper Path Banner */}
+                <div className="pt-2 border-t border-[#25322E] flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#0D1210] p-2.5 rounded-sm border border-[#2A3732]">
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <Code2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span className="text-slate-400 text-[11px] font-mono shrink-0">GitHub Paper Path:</span>
+                    <code className="text-emerald-300 font-mono text-xs bg-[#17201D] px-2 py-0.5 rounded-sm border border-[#2E3D37] truncate select-all">
+                      docs/ARXIV_PAPER.md
+                    </code>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      onClick={() => copyToClipboard("docs/ARXIV_PAPER.md", "github-path")}
+                      className="px-2.5 py-1 bg-[#1F2B26] hover:bg-[#2A3B34] text-slate-200 hover:text-white rounded-sm text-[11px] font-mono flex items-center gap-1 transition-colors cursor-pointer border border-[#3A4E46]"
+                      title="Copy GitHub Paper File Path"
+                    >
+                      {copiedCitation === "github-path" ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-400" />
+                          <span className="text-emerald-400 font-bold">Copied Path!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3 text-slate-400" />
+                          <span>Copy Path</span>
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        const link = document.createElement("a");
+                        link.href = "/docs/ARXIV_PAPER.md";
+                        link.download = "ARXIV_PAPER.md";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                      className="px-2.5 py-1 bg-[#1F2B26] hover:bg-[#2A3B34] text-slate-200 hover:text-white rounded-sm text-[11px] font-mono flex items-center gap-1 transition-colors cursor-pointer border border-[#3A4E46]"
+                      title="Download Markdown preprint document"
+                    >
+                      <Download className="w-3 h-3 text-emerald-400" />
+                      <span>.md File</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
