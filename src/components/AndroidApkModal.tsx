@@ -29,7 +29,8 @@ import {
   Info,
   SmartphoneNfc,
   ArrowUpRight,
-  Share2
+  Share2,
+  Link as LinkIcon
 } from "lucide-react";
 
 interface AndroidApkModalProps {
@@ -49,6 +50,7 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
   const [selectedVariant, setSelectedVariant] = useState<"full" | "compact">("full");
   const [copiedSha, setCopiedSha] = useState(false);
   const [copiedUrl, setCopiedUrl] = useState(false);
+  const [copiedApkUrl, setCopiedApkUrl] = useState(false);
   const [activeTab, setActiveTab] = useState<"install_guide" | "apk" | "structure" | "troubleshoot">("install_guide");
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [pwaInstalled, setPwaInstalled] = useState(false);
@@ -57,13 +59,18 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
   const [installStatusMessage, setInstallStatusMessage] = useState<string | null>(null);
   const [selectedBrowser, setSelectedBrowser] = useState<"chrome" | "samsung" | "firefox">("chrome");
 
-  const apkVersion = "v4.5.0-Benchmark-300K";
+  const apkVersion = "v4.5.0-Global-Benchmark-300K";
+  const buildCode = "40501 (Release 2026.08.30)";
   const apkSize = selectedVariant === "full" ? "42.6 MB" : "2.4 MB";
   const packageName = "org.floramedica.pro";
   const minAndroid = "Android 8.0+ (Oreo / API 26+)";
   const targetAndroid = "Android 14 / 15 (API 34/35)";
   const sha256Checksum =
     "a8f7c9e2b1049581d63428fbcd45e12089347510293485710293847510293847";
+
+  const appOrigin = typeof window !== "undefined" ? window.location.origin : "https://floramedica.app";
+  const directApkUrl = `${appOrigin}/download/${selectedVariant === "full" ? "FloraMedica_Pro_v4.5.0.apk" : "FloraMedica_Pro_v4.5.0_compact.apk"}`;
+  const webApkUrl = typeof window !== "undefined" ? window.location.href : "https://floramedica.app";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -119,9 +126,10 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
 
   const handleDownloadApk = async (variantOverride?: "full" | "compact") => {
     const variant = variantOverride || selectedVariant;
+    const sizeLabel = variant === "full" ? "42.6 MB" : "2.4 MB";
     setDownloadStarted(true);
     setDownloadProgress(10);
-    setDownloadStatus(`Preparing ${variant === "full" ? "38.4 MB" : "2.1 MB"} Android APK...`);
+    setDownloadStatus(`Preparing ${sizeLabel} Android APK (v4.5.0)...`);
 
     await downloadFloraMedicaApk(variant, (percent, status) => {
       setDownloadProgress(percent);
@@ -177,11 +185,25 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
     }
   };
 
+  const openDirectApkUrl = () => {
+    if (typeof window !== "undefined") {
+      window.open(directApkUrl, "_blank");
+    }
+  };
+
   const copyAppUrl = () => {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(window.location.href);
       setCopiedUrl(true);
       setTimeout(() => setCopiedUrl(false), 2500);
+    }
+  };
+
+  const copyApkDownloadUrl = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(directApkUrl);
+      setCopiedApkUrl(true);
+      setTimeout(() => setCopiedApkUrl(false), 2500);
     }
   };
 
@@ -330,17 +352,31 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
                 </div>
 
                 {/* Direct Link Copier */}
-                <div className="flex items-center justify-between p-2.5 bg-[#161C1A] border border-[#2D3748] rounded-sm text-[11px] font-mono">
-                  <span className="text-slate-400 truncate max-w-[280px] sm:max-w-md">
-                    Direct Link: <strong className="text-slate-200">{typeof window !== "undefined" ? window.location.href : "https://floramedica.app"}</strong>
-                  </span>
-                  <button
-                    onClick={copyAppUrl}
-                    className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/40 rounded-sm flex items-center gap-1 cursor-pointer shrink-0 ml-2 font-bold"
-                  >
-                    {copiedUrl ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedUrl ? "Copied Link!" : "Copy Link"}</span>
-                  </button>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-[#161C1A] border border-[#2D3748] rounded-sm text-[11px] font-mono gap-2">
+                  <div className="flex flex-col gap-0.5 truncate max-w-full">
+                    <span className="text-slate-400 text-[10px] uppercase tracking-wider font-bold text-emerald-400">
+                      Direct App WebAPK URL (Current Build {apkVersion}):
+                    </span>
+                    <span className="text-slate-200 truncate font-semibold">
+                      {webApkUrl}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 shrink-0 w-full sm:w-auto justify-end">
+                    <button
+                      onClick={copyAppUrl}
+                      className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/40 rounded-sm flex items-center gap-1 cursor-pointer font-bold"
+                    >
+                      {copiedUrl ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedUrl ? "Copied URL!" : "Copy App URL"}</span>
+                    </button>
+                    <button
+                      onClick={openInNewTab}
+                      className="px-2.5 py-1 bg-[#1E2623] text-slate-300 hover:text-white border border-[#2D3748] rounded-sm flex items-center gap-1 cursor-pointer font-bold"
+                    >
+                      <ExternalLink className="w-3 h-3 text-emerald-400" />
+                      <span>Open Link</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -573,11 +609,42 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
                 </div>
               )}
 
+              {/* Direct APK Link Box */}
+              <div className="p-3 bg-[#0F1412] border border-emerald-500/40 rounded-sm space-y-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono">
+                  <div className="flex flex-col gap-0.5 max-w-full truncate">
+                    <span className="text-emerald-400 font-bold uppercase text-[10px] tracking-wider flex items-center gap-1.5">
+                      <LinkIcon className="w-3.5 h-3.5" /> Direct APK Binary Download URL ({apkVersion}):
+                    </span>
+                    <span className="text-slate-300 text-[11px] truncate font-medium">
+                      {directApkUrl}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end">
+                    <button
+                      onClick={copyApkDownloadUrl}
+                      className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/40 rounded-sm flex items-center gap-1 cursor-pointer font-bold text-[11px]"
+                    >
+                      {copiedApkUrl ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedApkUrl ? "Copied APK Link!" : "Copy APK Link"}</span>
+                    </button>
+                    <a
+                      href={directApkUrl}
+                      download={selectedVariant === "full" ? "FloraMedica_Pro_v4.5.0.apk" : "FloraMedica_Pro_v4.5.0_compact.apk"}
+                      className="px-2.5 py-1 bg-[#1E2623] hover:bg-[#28332F] text-slate-200 border border-[#2D3748] rounded-sm flex items-center gap-1 cursor-pointer font-bold text-[11px]"
+                    >
+                      <Download className="w-3 h-3 text-emerald-400" />
+                      <span>Direct GET</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               {/* QR Code & Mobile Sideload section */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 bg-[#0F1412] border border-[#2D3748] rounded-sm flex flex-col items-center text-center gap-3">
                   <div className="flex items-center gap-1.5 text-emerald-400 font-bold uppercase font-mono text-[11px]">
-                    <QrCode className="w-4 h-4" /> Scan on Android Device
+                    <QrCode className="w-4 h-4" /> Scan on Android Phone
                   </div>
                   <div className="p-2.5 bg-white rounded-sm border border-emerald-500/50 shadow-md">
                     <svg
@@ -632,7 +699,7 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
                     </svg>
                   </div>
                   <p className="text-[10px] text-slate-400 font-mono">
-                    Point your Android camera at the QR code to open direct download link.
+                    Point camera at QR code to open download link on Android.
                   </p>
                 </div>
 
@@ -645,6 +712,14 @@ export const AndroidApkModal: React.FC<AndroidApkModalProps> = ({
                     <div className="flex justify-between border-b border-[#1A2220] pb-1">
                       <span className="text-slate-400">Package Name:</span>
                       <span className="text-white font-bold">{packageName}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#1A2220] pb-1">
+                      <span className="text-slate-400">Build Version:</span>
+                      <span className="text-emerald-300 font-bold">{apkVersion}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-[#1A2220] pb-1">
+                      <span className="text-slate-400">Build Code:</span>
+                      <span className="text-slate-200">{buildCode}</span>
                     </div>
                     <div className="flex justify-between border-b border-[#1A2220] pb-1">
                       <span className="text-slate-400">Min Android:</span>

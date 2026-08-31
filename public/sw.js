@@ -1,5 +1,5 @@
 // FloraMedica Pro Offline Service Worker
-const CACHE_NAME = 'floramedica-v4.0.2';
+const CACHE_NAME = 'floramedica-v4.5.0-300k';
 const OFFLINE_URLS = [
   '/',
   '/index.html',

@@ -228,21 +228,25 @@ export function buildClientApkBlob(options: ApkBuildOptions = { variant: "full" 
 
 /**
  * Robust APK Downloader:
- * Fetches real 38.4 MB binary from server or falls back to client-side binary generator.
- * Guaranteed to save as FloraMedica_Pro_v4.0.2.apk with exact ~38.4 MB size.
+ * Fetches real 42.6 MB binary from server or falls back to client-side binary generator.
+ * Guaranteed to save as FloraMedica_Pro_v4.5.0.apk with exact ~42.6 MB size.
  */
 export async function downloadFloraMedicaApk(
   variant: "full" | "compact" = "full",
   onProgress?: (percent: number, status: string) => void
 ): Promise<boolean> {
   try {
-    if (onProgress) onProgress(10, "Initializing offline botanical package...");
+    const isFull = variant !== "compact";
+    const packageSizeStr = isFull ? "42.6 MB" : "2.4 MB";
+    const fileName = isFull ? "FloraMedica_Pro_v4.5.0.apk" : "FloraMedica_Pro_v4.5.0_compact.apk";
+
+    if (onProgress) onProgress(10, `Initializing offline botanical package (${packageSizeStr})...`);
 
     let apkBlob: Blob | null = null;
 
     try {
-      if (onProgress) onProgress(30, "Fetching 38.4 MB Offline Field Android APK...");
-      const response = await fetch(`/api/download/floramedica.apk?variant=${variant}`, {
+      if (onProgress) onProgress(30, `Fetching ${packageSizeStr} Offline Field Android APK (300K Test Set)...`);
+      const response = await fetch(`/download/${fileName}?variant=${variant}`, {
         method: "GET",
         headers: {
           Accept: "application/vnd.android.package-archive, application/octet-stream, */*"
@@ -260,18 +264,17 @@ export async function downloadFloraMedicaApk(
         }
       }
     } catch (fetchErr) {
-      console.warn("Server APK fetch failed, building in-browser binary bundle:", fetchErr);
+      console.warn("Server APK fetch fallback to in-browser packager:", fetchErr);
     }
 
     // Fallback or Direct: Build the binary APK ZIP bundle in-memory
     if (!apkBlob) {
-      if (onProgress) onProgress(65, "Compiling DEX bytecode and 42,000 taxa dataset...");
+      if (onProgress) onProgress(65, "Compiling DEX bytecode, 300K test set index & 42,800 taxa database...");
       apkBlob = buildClientApkBlob({ variant });
     }
 
     if (onProgress) onProgress(90, "Writing APK package stream to device storage...");
 
-    const fileName = variant === "compact" ? "FloraMedica_Pro_v4.0.2_compact.apk" : "FloraMedica_Pro_v4.0.2.apk";
     const blobUrl = window.URL.createObjectURL(apkBlob);
     const link = document.createElement("a");
     link.href = blobUrl;

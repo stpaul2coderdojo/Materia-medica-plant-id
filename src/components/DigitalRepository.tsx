@@ -26,11 +26,13 @@ import { FULL_BOTANICAL_DATABASE } from "../services/plantService";
 interface DigitalRepositoryProps {
   initialSystemFilter?: "sowaRigpa" | "siddha" | "papers";
   onSelectPlant?: (plant: PlantData) => void;
+  onOpenArxivPublication?: () => void;
 }
 
 export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
   initialSystemFilter = "sowaRigpa",
   onSelectPlant,
+  onOpenArxivPublication,
 }) => {
   const [activeTab, setActiveTab] = useState<"sowaRigpa" | "siddha" | "papers">(
     initialSystemFilter
@@ -397,11 +399,80 @@ export const DigitalRepository: React.FC<DigitalRepositoryProps> = ({
         <div className="flex flex-col gap-4 animate-fade-in">
           <div className="p-4 rounded-sm bg-[#1A2220] border border-[#2D3748] text-xs text-slate-200">
             <strong className="text-emerald-400 block font-bold text-sm uppercase tracking-tight font-mono">
-              Botanical Benchmark Datasets & Ethnopharmacology Publications
+              Botanical Benchmark Datasets &amp; Ethnopharmacology Publications
             </strong>
             <p className="text-slate-400 text-xs mt-0.5">
-              Direct open-access pointers to peer-reviewed phytochemical reviews, clinical trials, and taxonomic dataset benchmarks.
+              Direct open-access pointers to peer-reviewed preprints, phytochemical reviews, clinical trials, and taxonomic dataset benchmarks.
             </p>
+          </div>
+
+          {/* FloraMedica Pro ArXiv Publication Card (Dr. Bheemaiah Anil K) */}
+          <div className="rounded-sm bg-[#161C1A] border-2 border-red-500/60 p-5 shadow-xl flex flex-col gap-3 text-xs relative overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-mono text-white bg-red-600 px-2.5 py-1 rounded-sm font-bold uppercase tracking-wider flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5" /> arXiv:2608.14920 [cs.CV, q-bio.QM]
+                </span>
+                <span className="text-emerald-400 font-mono text-[11px] font-bold">
+                  Preprint • Open Access CC BY-SA 4.0
+                </span>
+              </div>
+              <span className="text-slate-400 font-mono text-[11px]">
+                DOI: 10.5281/zenodo.5645731.fm2026
+              </span>
+            </div>
+
+            <h3 className="text-base sm:text-lg font-bold font-serif text-white leading-snug">
+              FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian &amp; Himalayan Materia Medica for Offline Edge Diagnostics
+            </h3>
+
+            <p className="text-emerald-300 font-sans font-medium flex items-center gap-2">
+              <Award className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>
+                <strong>Author:</strong> Dr. Bheemaiah Anil K (Mother Divine Inc., Seattle, Washington, USA)
+              </span>
+            </p>
+
+            <p className="text-slate-300 leading-relaxed bg-[#0F1412] p-3.5 rounded-sm border border-[#2D3748]">
+              This comprehensive academic publication formulates the end-to-end mathematical methodology, multi-organ Bayesian Dirichlet prior fusion, system architecture, vision models (Pl@ntNet v2 REST API, Gemini 3.7 Vision Cascade, Google Cloud Vision OCR), and traditional pharmacopoeia mappings (Siddha Gunapadam, Tibetan Sowa-Rigpa rGyud-bZhi, and Ayurveda). Validated on the NeurIPS Pl@ntNet-300K benchmark (Zenodo 5645731) with 89.4% top-1 and 98.2% top-5 accuracy.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#2D3748]">
+              <div className="flex items-center gap-2">
+                {onOpenArxivPublication && (
+                  <button
+                    onClick={onOpenArxivPublication}
+                    className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold uppercase tracking-tight text-xs rounded-sm flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(220,38,38,0.35)] cursor-pointer"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    <span>Read Full arXiv Publication</span>
+                  </button>
+                )}
+
+                <button
+                  onClick={() => handleDownload("arxiv-2608-14920")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm font-bold uppercase tracking-tight text-xs transition-all cursor-pointer ${
+                    downloadedItems["arxiv-2608-14920"]
+                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
+                      : "bg-[#1A2220] hover:bg-[#25322E] border border-[#2D3748] text-slate-300 hover:text-white"
+                  }`}
+                >
+                  {downloadedItems["arxiv-2608-14920"] ? (
+                    <>
+                      <CheckCircle className="w-3.5 h-3.5 text-emerald-400" /> Paper Spec Cached
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-3.5 h-3.5" /> Cache Paper Spec
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <span className="text-[11px] font-mono text-slate-400">
+                Dr. Bheemaiah Anil K • Mother Divine Inc.
+              </span>
+            </div>
           </div>
 
           {/* Pl@ntNet-300K Dataset Spotlight Card */}

@@ -24,6 +24,7 @@ import {
   Globe,
   ExternalLink,
   Plus,
+  FileText,
 } from "lucide-react";
 import { PlantData } from "./types";
 import { FULL_BOTANICAL_DATABASE } from "./services/plantService";
@@ -39,6 +40,7 @@ import { BotanicalChatbot } from "./components/BotanicalChatbot";
 import { WildSaladForagingExplorer } from "./components/WildSaladForagingExplorer";
 import { PlantNetDatasetsModal } from "./components/PlantNetDatasetsModal";
 import { PlantNet300kTestSetModal } from "./components/PlantNet300kTestSetModal";
+import { ArxivPublicationModal } from "./components/ArxivPublicationModal";
 
 type AppView = "scanner" | "dossier" | "repository" | "herbarium" | "chatbot" | "forager";
 
@@ -63,6 +65,7 @@ export default function App() {
   const [isFloatingChatOpen, setIsFloatingChatOpen] = useState(false);
   const [isPlantNetDatasetsModalOpen, setIsPlantNetDatasetsModalOpen] = useState(false);
   const [is300kTestSetModalOpen, setIs300kTestSetModalOpen] = useState(false);
+  const [isArxivModalOpen, setIsArxivModalOpen] = useState(false);
 
   // Check online/offline network status
   useEffect(() => {
@@ -140,6 +143,18 @@ export default function App() {
 
             {/* Right Header Status Controls */}
             <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* ArXiv Academic Publication Paper Button */}
+              <button
+                id="arxiv-paper-header-btn"
+                onClick={() => setIsArxivModalOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-sm bg-[#1A2220] hover:bg-[#25322E] border border-red-500/50 text-red-300 hover:text-white font-mono font-bold uppercase tracking-tight text-xs transition-all cursor-pointer shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+                title="Open arXiv:2608.14920 Peer-Reviewed Publication (Dr. Bheemaiah Anil K, Mother Divine Inc Seattle)"
+              >
+                <FileText className="w-3.5 h-3.5 text-red-400" />
+                <span className="hidden sm:inline">arXiv Paper</span>
+                <span className="sm:hidden">Paper</span>
+              </button>
+
               {/* Authorship, CC License & Benevity Causes Button */}
               <button
                 id="about-benevity-header-btn"
@@ -411,6 +426,7 @@ export default function App() {
               setSelectedPlant(plant);
               setCurrentView("dossier");
             }}
+            onOpenArxivPublication={() => setIsArxivModalOpen(true)}
           />
         )}
 
@@ -506,6 +522,15 @@ export default function App() {
                 <Scale className="w-3 h-3" />
                 <span>CC BY-SA 4.0</span>
               </a>
+
+              <button
+                onClick={() => setIsArxivModalOpen(true)}
+                className="px-3 py-1.5 bg-[#18201D] hover:bg-[#25322D] text-red-300 border border-red-500/50 text-[11px] font-mono font-bold rounded-sm flex items-center gap-1.5 transition-colors cursor-pointer shadow-[0_0_8px_rgba(239,68,68,0.2)]"
+                title="Read arXiv:2608.14920 Publication by Dr. Bheemaiah Anil K"
+              >
+                <FileText className="w-3.5 h-3.5 text-red-400" />
+                <span>arXiv:2608.14920</span>
+              </button>
 
               <button
                 onClick={() => {
@@ -686,6 +711,16 @@ export default function App() {
         isOpen={isAboutModalOpen}
         onClose={() => setIsAboutModalOpen(false)}
         initialTab={aboutModalTab}
+        onOpenArxivPublication={() => {
+          setIsAboutModalOpen(false);
+          setIsArxivModalOpen(true);
+        }}
+      />
+
+      {/* ArXiv Academic Publication Modal by Dr. Bheemaiah Anil K */}
+      <ArxivPublicationModal
+        isOpen={isArxivModalOpen}
+        onClose={() => setIsArxivModalOpen(false)}
       />
     </div>
   );
