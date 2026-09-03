@@ -128,47 +128,7 @@ async function startServer() {
     });
   });
 
-  // API Route: Deliver arXiv Academic Publication Markdown & Spec
-  app.get("/api/arxiv-paper", (req, res) => {
-    try {
-      const paperPath = path.join(process.cwd(), "docs", "ARXIV_PAPER.md");
-      if (fs.existsSync(paperPath)) {
-        const content = fs.readFileSync(paperPath, "utf-8");
-        res.json({
-          title: "FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics",
-          author: "Dr. Bheemaiah Anil K",
-          institution: "Mother Divine Inc., Seattle, Washington, USA",
-          arxivId: "arXiv:2608.14920",
-          doi: "10.5281/zenodo.5645731.fm2026",
-          license: "CC BY-SA 4.0",
-          githubPath: "docs/ARXIV_PAPER.md",
-          markdown: content,
-        });
-      } else {
-        res.status(404).json({ error: "Paper document not found" });
-      }
-    } catch (err: any) {
-      res.status(500).json({ error: err.message });
-    }
-  });
 
-  // Serve static docs directly (supporting both /docs and /doc paths)
-  const servePaperHandler = (req: any, res: any) => {
-    let resolvedPaperPath = path.join(process.cwd(), "docs", "ARXIV_PAPER.md");
-    if (!fs.existsSync(resolvedPaperPath)) {
-      resolvedPaperPath = path.join(process.cwd(), "doc", "ARXIV_PAPER.md");
-    }
-    if (fs.existsSync(resolvedPaperPath)) {
-      res.setHeader("Content-Type", "text/markdown; charset=utf-8");
-      res.setHeader("Content-Disposition", "inline; filename=\"ARXIV_PAPER.md\"");
-      res.sendFile(resolvedPaperPath);
-    } else {
-      res.status(404).send("Paper not found");
-    }
-  };
-
-  app.get("/docs/ARXIV_PAPER.md", servePaperHandler);
-  app.get("/doc/ARXIV_PAPER.md", servePaperHandler);
 
   // Helper for generating standard APK / ZIP bundle containing complete offline botanical assets
   function generateFloraMedicaApkBuffer(variant: "full" | "compact" = "full"): Buffer {

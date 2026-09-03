@@ -7,23 +7,6 @@
 
 ---
 
-## 📄 Academic Publication & Preprint
-
-The full camera-ready academic publication is documented in this repository:
-
-**Path to arXiv Paper:**  
-👉 [`docs/ARXIV_PAPER.md`](docs/ARXIV_PAPER.md)
-
-### Publication Details
-- **Title:** *FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian & Himalayan Materia Medica for Offline Edge Diagnostics*
-- **Author:** **Dr. Bheemaiah Anil K** (`bheemaiah@alumni.iitm.ac.in`)
-- **Institution:** **Mother Divine Inc.**, Seattle, Washington, USA
-- **Preprint Identifier:** `FloraMedica-2026 [cs.CV, q-bio.QM]`
-- **DOI:** [`10.5281/zenodo.22202177`](https://doi.org/10.5281/zenodo.22202177)
-- **Citation:** [BibTeX & Citation Instructions](docs/ARXIV_PAPER.md#14-bibtex--citation-formats)
-
----
-
 ## 🌿 Core Features
 
 1. **Pl@ntNet Multi-Organ Vision Integration:**
@@ -63,12 +46,9 @@ The full camera-ready academic publication is documented in this repository:
 ## 🏗️ Project Structure
 
 ```
-├── docs/
-│   └── ARXIV_PAPER.md            # Full camera-ready arXiv:2608.14920 academic paper
 ├── public/                       # Static assets, PWA manifest, and icons
 ├── src/
 │   ├── components/
-│   │   ├── ArxivPublicationModal.tsx     # In-app interactive arXiv paper viewer
 │   │   ├── BotanicalScanner.tsx          # Multi-organ image capture & live identification
 │   │   ├── PharmacopoeiaDossier.tsx      # Siddha, Sowa-Rigpa & Ayurvedic monographs
 │   │   ├── DigitalRepository.tsx         # Digital repository & papers browser

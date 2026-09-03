@@ -25,14 +25,12 @@ interface AboutAttributionModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialTab?: "authorship" | "license" | "benevity";
-  onOpenArxivPublication?: () => void;
 }
 
 export const AboutAttributionModal: React.FC<AboutAttributionModalProps> = ({
   isOpen,
   onClose,
   initialTab = "authorship",
-  onOpenArxivPublication,
 }) => {
   const [activeTab, setActiveTab] = useState<"authorship" | "license" | "benevity">(initialTab);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
@@ -200,36 +198,6 @@ export const AboutAttributionModal: React.FC<AboutAttributionModalProps> = ({
                 </h4>
                 <p className="text-xs leading-relaxed text-slate-300">
                   FloraMedica is an open-access, offline-first digital herbarium and AI-assisted botanical diagnostic platform designed by Dr. Bheemaiah Anil K under Mother Divine Inc, Seattle. It synthesizes classical Siddha (Telugu/Tamil), Sowa-Rigpa (Tibetan Gyud-Zhi), Ayurveda (Charaka/Sushruta), and Western phytochemistry with computer vision to safeguard biocultural heritage and empower field researchers worldwide.
-                </p>
-              </div>
-
-              {/* ArXiv Academic Publication Banner */}
-              <div className="p-4 rounded-sm bg-[#18221F] border border-red-500/40 space-y-2.5">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-sm bg-red-600/20 text-red-400 border border-red-500/40 text-[10px] font-mono font-bold">
-                      arXiv:2608.14920 [cs.CV, q-bio.QM]
-                    </span>
-                    <span className="text-[11px] text-emerald-400 font-mono">Peer-Reviewed Preprint</span>
-                  </div>
-                  {onOpenArxivPublication && (
-                    <button
-                      onClick={() => {
-                        onClose();
-                        onOpenArxivPublication();
-                      }}
-                      className="px-3 py-1 bg-red-600/20 hover:bg-red-600/40 border border-red-500/50 text-red-300 hover:text-white rounded-sm text-xs font-mono font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                    >
-                      <BookOpen className="w-3.5 h-3.5 text-red-400" />
-                      <span>Read Full ArXiv Paper</span>
-                    </button>
-                  )}
-                </div>
-                <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
-                  FloraMedica Pro: A Neural-Pharmacopoeial Synthesis Architecture Integrating Pl@ntNet Multi-Organ Vision, Google Cloud Vision OCR, and Classical Indian &amp; Himalayan Materia Medica for Offline Edge Diagnostics
-                </h4>
-                <p className="text-xs text-slate-300">
-                  <strong>Author:</strong> Dr. Bheemaiah Anil K (Mother Divine Inc., Seattle) • Comprehensive formal paper with Abstract, What/Why/How, Methods, Architecture, AI Models, Pl@ntNet API &amp; Datasets, Google Vision OCR, Screenshots, and 18 Academic Citations.
                 </p>
               </div>
 
