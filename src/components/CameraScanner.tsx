@@ -25,6 +25,7 @@ import {
   Bot,
   Leaf,
   Utensils,
+  BarChart3,
 } from "lucide-react";
 import { PlantData, PlantNetOrgan, PlantNetDatasetType } from "../types";
 import { PlantService, FULL_BOTANICAL_DATABASE } from "../services/plantService";
@@ -36,6 +37,7 @@ interface CameraScannerProps {
   onOpenLookup?: () => void;
   onOpenChatbot?: () => void;
   onOpenForager?: () => void;
+  onOpenBiodiversity?: () => void;
 }
 
 export const CameraScanner: React.FC<CameraScannerProps> = ({
@@ -44,6 +46,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({
   onOpenLookup,
   onOpenChatbot,
   onOpenForager,
+  onOpenBiodiversity,
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -491,8 +494,8 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({
         onChange={handleFileUpload}
       />
 
-      {/* Top Feature Spotlight: Wild Salad Foraging & Botanical AI Bot & Herb Lookup */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 p-2.5 bg-[#161C1A] border border-[#2D3748] rounded-sm shadow-sm">
+      {/* Top Feature Spotlight: Wild Salad Foraging, Botanical AI Bot, Grouping & Biodiversity, and Herb Lookup */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 p-2.5 bg-[#161C1A] border border-[#2D3748] rounded-sm shadow-sm">
         {/* 1. Wild Salad & Foraging Explorer Spotlight */}
         {onOpenForager && (
           <button
@@ -525,7 +528,39 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({
           </button>
         )}
 
-        {/* 2. Botanical AI Knowledge Bot Spotlight */}
+        {/* 2. Plant Grouping Estimation & Biodiversity Check Spotlight */}
+        {onOpenBiodiversity && (
+          <button
+            id="scanner-open-biodiversity-card-btn"
+            onClick={onOpenBiodiversity}
+            className="flex items-center justify-between p-2.5 bg-[#0F1412] hover:bg-[#131D19] border border-emerald-500/50 hover:border-emerald-400 rounded-sm text-left transition-all cursor-pointer group shadow-sm ring-1 ring-emerald-500/20"
+            title="Open Plant Grouping Estimation, Population Statistics & Biodiversity Health Check"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-sm bg-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                <BarChart3 className="w-4 h-4 stroke-[2.2]" />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-bold uppercase tracking-tight text-white group-hover:text-emerald-300">
+                    Grouping &amp; Biodiversity
+                  </span>
+                  <span className="text-[9px] font-mono px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xs">
+                    Survey
+                  </span>
+                </div>
+                <span className="text-[10px] text-slate-400 font-mono line-clamp-1">
+                  Quadrat &amp; Population Stats
+                </span>
+              </div>
+            </div>
+            <span className="text-emerald-400 font-mono text-xs group-hover:translate-x-0.5 transition-transform">
+              →
+            </span>
+          </button>
+        )}
+
+        {/* 3. Botanical AI Knowledge Bot Spotlight */}
         {onOpenChatbot && (
           <button
             id="scanner-open-chatbot-card-btn"
@@ -547,7 +582,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({
                   </span>
                 </div>
                 <span className="text-[10px] text-slate-400 font-mono line-clamp-1">
-                  Multi-Organ Diagnostics &amp; Dosage
+                  Multi-Organ Diagnostics
                 </span>
               </div>
             </div>
@@ -557,7 +592,7 @@ export const CameraScanner: React.FC<CameraScannerProps> = ({
           </button>
         )}
 
-        {/* 3. Fast Herb Search Trigger */}
+        {/* 4. Fast Herb Search Trigger */}
         <button
           id="scanner-herb-lookup-trigger-btn"
           onClick={onOpenLookup}

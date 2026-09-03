@@ -25,6 +25,7 @@ import {
   ExternalLink,
   Plus,
   FileText,
+  BarChart3,
 } from "lucide-react";
 import { PlantData } from "./types";
 import { FULL_BOTANICAL_DATABASE } from "./services/plantService";
@@ -41,8 +42,9 @@ import { WildSaladForagingExplorer } from "./components/WildSaladForagingExplore
 import { PlantNetDatasetsModal } from "./components/PlantNetDatasetsModal";
 import { PlantNet300kTestSetModal } from "./components/PlantNet300kTestSetModal";
 import { ArxivPublicationModal } from "./components/ArxivPublicationModal";
+import { PlantGroupingPopulationEstimator } from "./components/PlantGroupingPopulationEstimator";
 
-type AppView = "scanner" | "dossier" | "repository" | "herbarium" | "chatbot" | "forager";
+type AppView = "scanner" | "biodiversity" | "dossier" | "repository" | "herbarium" | "chatbot" | "forager";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>("scanner");
@@ -260,7 +262,25 @@ export default function App() {
               <span>Scanner</span>
             </button>
 
-            {/* 2. 🌿 Wild Salad & Foraging Explorer - High Visibility */}
+            {/* 2. 📊 Plant Grouping Estimation & Biodiversity Survey */}
+            <button
+              id="header-biodiversity-nav-btn"
+              onClick={() => setCurrentView("biodiversity")}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-sm text-xs font-bold uppercase tracking-tight whitespace-nowrap transition-all cursor-pointer ${
+                currentView === "biodiversity"
+                  ? "bg-emerald-500 text-black shadow-sm ring-1 ring-emerald-300"
+                  : "bg-emerald-950/40 text-emerald-300 hover:text-white hover:bg-emerald-900/60 border border-emerald-500/40"
+              }`}
+              title="Estimate Plant Groupings, Population Density & Shannon Biodiversity from Multi-Frame Camera/Uploads"
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Grouping &amp; Biodiversity</span>
+              <span className="text-[9px] font-mono px-1 py-0.2 bg-emerald-500/20 text-emerald-200 rounded-xs border border-emerald-500/40">
+                Pop Stats
+              </span>
+            </button>
+
+            {/* 3. 🌿 Wild Salad & Foraging Explorer - High Visibility */}
             <button
               id="header-foraging-nav-btn"
               onClick={() => setCurrentView("forager")}
@@ -384,8 +404,20 @@ export default function App() {
               onOpenLookup={() => setIsLookupModalOpen(true)}
               onOpenChatbot={() => setCurrentView("chatbot")}
               onOpenForager={() => setCurrentView("forager")}
+              onOpenBiodiversity={() => setCurrentView("biodiversity")}
             />
           </div>
+        )}
+
+        {currentView === "biodiversity" && (
+          <PlantGroupingPopulationEstimator
+            isOnlineMode={isOnlineMode}
+            onSelectPlantForDossier={(plant) => {
+              setSelectedPlant(plant);
+              setCurrentView("dossier");
+            }}
+            onOpenHerbLookup={() => setIsLookupModalOpen(true)}
+          />
         )}
 
         {currentView === "dossier" && (

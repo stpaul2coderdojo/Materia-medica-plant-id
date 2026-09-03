@@ -906,6 +906,164 @@ Return the response strictly adhering to the specified JSON schema.`;
     }
   });
 
+  // API Route: Plant Grouping Estimation, Population Statistics & Biodiversity Analysis
+  app.post("/api/estimate-population-biodiversity", async (req, res) => {
+    try {
+      const {
+        images = [],
+        samplingMethod = "quadrat_standard",
+        quadratAreaM2 = 1.0,
+        surveyZoneAreaM2 = 100.0,
+        notes = "",
+      } = req.body;
+
+      if (!Array.isArray(images) || images.length === 0) {
+        return res.status(400).json({ error: "Missing or empty images array" });
+      }
+
+      const ai = getGeminiClient();
+      if (!ai) {
+        return res.status(503).json({
+          error: "GEMINI_API_KEY is not configured on the server.",
+          isOfflineFallbackRequired: true,
+        });
+      }
+
+      // Analyze up to 6 images in parallel with Gemini Vision
+      const processedFrames = await Promise.all(
+        images.slice(0, 6).map(async (imgObj: any, index: number) => {
+          const cleanBase64 = (imgObj.imageBase64 || "").replace(/^data:image\/[a-z]+;base64,/, "");
+          const mimeType = imgObj.mimeType || "image/jpeg";
+          const label = imgObj.label || `Quadrat Frame #${index + 1}`;
+
+          if (!cleanBase64) {
+            return {
+              id: imgObj.id || `frame-${index + 1}`,
+              imageSrc: imgObj.imageBase64 || "",
+              label,
+              timestamp: Date.now(),
+              detectedGroups: [],
+              totalIndividuals: 0,
+              totalCanopyCoverage: 0,
+            };
+          }
+
+          const prompt = `You are an expert quantitative plant ecologist and field taxonomist conducting a botanical quadrat/transect survey using Pl@ntNet-300K benchmarks.
+Examine this botanical quadrat frame (${label}). Method: ${samplingMethod}, Plot Area: ${quadratAreaM2} m².
+
+Identify all distinct plant groupings/taxa visible in this specific frame:
+1. Scientific name (genus & species) and common name
+2. Family
+3. Estimated count of individual plants/ramets/rosettes rooted within this frame
+4. Percentage canopy / foliage ground cover (0-100%)
+5. Growth habit: "Rosette" | "Erect Herb" | "Clumping Stolon" | "Sub-shrub" | "Creeping Vine" | "Cushion" | "Tuber/Basal"
+6. Is medicinal: boolean (true if used in Ayurveda, Siddha, Sowa-Rigpa or Western herbalism)
+7. Is edible: boolean (true if wild edible salad green, tuber, berry, or flour)
+8. Is invasive: boolean (true if noxious/invasive weed like Parthenium, Lantana, Ageratina)
+9. Approximate bounding zone in percent { x, y, width, height } (0-100)
+
+Return ONLY valid JSON strictly matching this schema:
+{
+  "totalIndividuals": number,
+  "totalCanopyCoverage": number,
+  "detectedGroups": [
+    {
+      "scientificName": string,
+      "commonName": string,
+      "family": string,
+      "estimatedCount": number,
+      "canopyCoverPercentage": number,
+      "confidence": number,
+      "growthHabit": string,
+      "isMedicinal": boolean,
+      "isEdible": boolean,
+      "isInvasive": boolean,
+      "conservationStatus": "Least Concern" | "Vulnerable" | "Near Threatened" | "Endangered" | "Invasive Weed",
+      "boundingZone": { "x": number, "y": number, "width": number, "height": number }
+    }
+  ]
+}`;
+
+          try {
+            const { response } = await generateContentWithFallback(ai, {
+              contents: [
+                {
+                  role: "user",
+                  parts: [
+                    { inlineData: { mimeType, data: cleanBase64 } },
+                    { text: prompt },
+                  ],
+                },
+              ],
+              config: {
+                responseMimeType: "application/json",
+                temperature: 0.2,
+              },
+              candidateModels: ["gemini-3.1-flash-lite", "gemini-3.7-flash", "gemini-2.5-flash"],
+            });
+
+            const parsed = JSON.parse(response.text || "{}");
+            const groups = (parsed.detectedGroups || []).map((g: any, gIdx: number) => ({
+              id: `ai-group-${index + 1}-${gIdx + 1}`,
+              scientificName: g.scientificName || "Unknown Herb",
+              commonName: g.commonName || "Wild Herb",
+              family: g.family || "Unknown",
+              estimatedCount: Number(g.estimatedCount) || 5,
+              canopyCoverPercentage: Number(g.canopyCoverPercentage) || 20,
+              confidence: Number(g.confidence) || 0.9,
+              growthHabit: g.growthHabit || "Erect Herb",
+              isMedicinal: !!g.isMedicinal,
+              isEdible: !!g.isEdible,
+              isInvasive: !!g.isInvasive,
+              conservationStatus: g.conservationStatus || (g.isInvasive ? "Invasive Weed" : "Least Concern"),
+              boundingZone: g.boundingZone || { x: 10 + gIdx * 25, y: 15, width: 30, height: 35 },
+            }));
+
+            const totalInd =
+              parsed.totalIndividuals ||
+              groups.reduce((acc: number, g: any) => acc + g.estimatedCount, 0);
+            const totalCov =
+              parsed.totalCanopyCoverage ||
+              Math.min(100, groups.reduce((acc: number, g: any) => acc + g.canopyCoverPercentage, 0));
+
+            return {
+              id: imgObj.id || `frame-${index + 1}`,
+              imageSrc: imgObj.imageBase64,
+              label,
+              timestamp: Date.now(),
+              detectedGroups: groups,
+              totalIndividuals: totalInd,
+              totalCanopyCoverage: totalCov,
+            };
+          } catch (frameErr) {
+            console.warn(`Frame ${index + 1} AI grouping estimation failed:`, frameErr);
+            return null;
+          }
+        })
+      );
+
+      const validFrames = processedFrames.filter(Boolean);
+      if (validFrames.length === 0) {
+        return res.status(500).json({
+          error: "Failed to process frames with AI vision",
+          isOfflineFallbackRequired: true,
+        });
+      }
+
+      return res.json({
+        success: true,
+        isAiEnhanced: true,
+        frames: validFrames,
+      });
+    } catch (err: any) {
+      console.error("Population estimation API error:", err);
+      return res.status(500).json({
+        error: err.message || "Failed to estimate population and biodiversity",
+        isOfflineFallbackRequired: true,
+      });
+    }
+  });
+
   // API Route: Herb Lookup by Common Name or Scientific Name (Online PlantNet API vs Offline Pl@ntNet-300K)
   app.post("/api/lookup-herb", async (req, res) => {
     try {

@@ -398,3 +398,121 @@ export interface FeedbackStats {
   topMisidentified: { original: string; corrected: string; count: number }[];
 }
 
+// -------------------------------------------------------------
+// Plant Grouping, Population Statistics & Biodiversity Types
+// -------------------------------------------------------------
+
+export type SamplingCriteriaMethod =
+  | "quadrat_standard" // 1.0m x 1.0m (Standard Herbaceous / Ground Flora)
+  | "quadrat_micro"    // 0.5m x 0.5m (Alpine Turf, Cushion Mosses, Lichens)
+  | "belt_transect"    // 10m-20m Line / Belt Transect
+  | "point_quarter"    // Point-Centered Quarter Distance Method
+  | "patch_colony";    // Clonal Patch / Rhizome Colony
+
+export interface SamplingCriteriaInfo {
+  id: SamplingCriteriaMethod;
+  name: string;
+  shortName: string;
+  recommendedSampleCount: string;
+  minFrames: number;
+  plotAreaM2: number;
+  idealStratum: string;
+  cameraProtocol: string;
+  boundaryRule: string;
+  description: string;
+  iconName: string;
+}
+
+export interface DetectedPlantGroup {
+  id: string;
+  plantId?: string;
+  scientificName: string;
+  commonName: string;
+  family: string;
+  estimatedCount: number;
+  canopyCoverPercentage: number;
+  confidence: number;
+  growthHabit: "Rosette" | "Erect Herb" | "Clumping Stolon" | "Sub-shrub" | "Creeping Vine" | "Cushion" | "Tuber/Basal";
+  isMedicinal?: boolean;
+  isEdible?: boolean;
+  isInvasive?: boolean;
+  conservationStatus?: "Least Concern" | "Vulnerable" | "Near Threatened" | "Endangered" | "Invasive Weed";
+  boundingZone?: { x: number; y: number; width: number; height: number }; // Relative coordinates 0-100%
+}
+
+export interface SampledFrame {
+  id: string;
+  imageSrc: string;
+  label: string; // e.g., "Sample Frame #1 (Quadrat A)"
+  timestamp: number;
+  detectedGroups: DetectedPlantGroup[];
+  totalIndividuals: number;
+  totalCanopyCoverage: number;
+  notes?: string;
+}
+
+export interface SpeciesPopulationEstimate {
+  scientificName: string;
+  commonName: string;
+  family: string;
+  totalObservedCount: number;
+  meanCountPerFrame: number;
+  countVariance: number;
+  standardDeviation: number;
+  standardError: number;
+  confidenceInterval95: [number, number];
+  densityPerM2: number;
+  relativeAbundance: number; // percentage (0 - 100%)
+  frequencyPercentage: number; // percentage of sampled frames containing species
+  meanCanopyCoverage: number; // percentage (0 - 100%)
+  spatialDispersion: {
+    varianceToMeanRatio: number;
+    pattern: "Clustered / Contagious" | "Random" | "Uniform / Regular";
+    morisitaIndex: number;
+    interpretation: string;
+  };
+  estimatedTotalPopulation: number;
+  populationRange: [number, number];
+  isMedicinal: boolean;
+  isEdible: boolean;
+  isInvasive: boolean;
+  conservationStatus: string;
+}
+
+export interface BiodiversityIndices {
+  speciesRichness: number; // S
+  totalIndividualsSampled: number; // N
+  shannonWienerIndex: number; // H' = -sum(pi * ln(pi))
+  shannonMax: number; // ln(S)
+  pielouEvenness: number; // J' = H' / ln(S)
+  simpsonDominance: number; // D = sum(pi^2)
+  simpsonDiversity: number; // 1 - D
+  simpsonReciprocal: number; // 1 / D
+  margalefRichness: number; // (S - 1) / ln(N)
+  bergerParkerDominance: number; // max(ni) / N
+  dominantSpecies: string;
+  ecologicalHealthGrade: "A+ (Pristine High-Diversity)" | "A (Rich Poly-culture)" | "B (Stable Semi-Natural)" | "C (Moderately Disturbed)" | "D (Degraded / Monoculture)";
+  ecologicalHealthSummary: string;
+  warnings: string[];
+  nativeVsInvasiveCount: { native: number; invasive: number };
+  medicinalKeystoneTaxa: string[];
+  wildEdibleTaxa: string[];
+}
+
+export interface PopulationSurveyReport {
+  surveyId: string;
+  surveyDate: string;
+  samplingMethod: SamplingCriteriaMethod;
+  criteriaDetails: SamplingCriteriaInfo;
+  framesCount: number;
+  quadratAreaM2: number;
+  surveyZoneAreaM2: number;
+  samples: SampledFrame[];
+  speciesEstimates: SpeciesPopulationEstimate[];
+  biodiversity: BiodiversityIndices;
+  overallDensityPerM2: number;
+  overallVegetationCover: number;
+  isAiEnhanced: boolean;
+  notes?: string;
+}
+

@@ -46,6 +46,18 @@ The full camera-ready academic publication is documented in this repository:
 5. **Offline PWA & Android WebAPK:**
    - Full offline functionality via local vector priors and Service Worker caching for high-altitude Himalayan and rural field use.
 
+6. **Plant Grouping, Population Estimation & Biodiversity Health Check:**
+   - **Multi-Frame Sampling Input:** Capture live frames through camera viewfinder with real-time quadrat grid overlays or upload a batch of 3–15 field photos.
+   - **Five Standard Sampling Criteria:**
+     - *Standard Quadrat (1m × 1m):* Herbaceous ground flora, montane forbs, low sub-shrubs with North-East border boundary rule.
+     - *Micro-Quadrat (0.5m × 0.5m):* Dense alpine cushion flora, bryophytes, and saxicolous turf.
+     - *Belt Transect (10m–20m):* Linear corridor zonation across moisture/elevation ecotones.
+     - *Point-Centered Quarter Distance:* Plotless density sampling for dispersed medicinal perennials.
+     - *Clonal Patch Survey:* Ramet nodal density and stoloniferous canopy cover (e.g. *Centella*, *Fragaria*).
+   - **Population Statistics Engine:** Calculates mean counts, sample variance ($s^2$), standard error, 95% Student's t confidence intervals, absolute density per $m^2$, relative abundance %, frequency %, canopy cover %, and spatial dispersion pattern (Variance-to-Mean Ratio $s^2/\bar{x}$, Morisita Index).
+   - **Rigorous Biodiversity Indices:** Shannon-Wiener Diversity ($H'$), Simpson's Reciprocal ($1/D$), Pielou's Evenness ($J'$), Margalef Richness ($D_{Mg}$), Berger-Parker Dominance, and Native vs. Invasive Weed Ratio.
+   - **Ecological Diagnosis & Reporting:** Ecological health grading (A+ Pristine to D Degraded), red-list threatened species alerts, and single-click CSV/JSON export ready for Excel, R, and QGIS.
+
 ---
 
 ## 🏗️ Project Structure
@@ -100,6 +112,38 @@ npm run dev
 ```bash
 npm run build
 npm start
+```
+
+---
+
+## 🐳 Docker Container & Cloud Run Deployment
+
+### Docker Container Build & Run
+
+```bash
+# Build production Docker container
+docker build -t floramedica-pro:latest .
+
+# Run container locally on port 3000
+docker run -p 3000:3000 -e GEMINI_API_KEY="your_api_key" floramedica-pro:latest
+```
+
+### Google Cloud Run Deployment
+
+- **Hosting Platform:** Google Cloud Run (Fully Managed Serverless Container)
+- **Service Region:** `asia-southeast1` (Singapore)
+- **Container Port:** `3000` (HTTPS Reverse-proxied)
+- **Development App URL:** `https://ais-dev-3bqcolu6gzhfjosm4f6z6p-219346993343.asia-southeast1.run.app`
+- **Shared / Production App URL:** `https://ais-pre-3bqcolu6gzhfjosm4f6z6p-219346993343.asia-southeast1.run.app`
+
+Deploy to your Cloud Run project via Google Cloud SDK (`gcloud`):
+```bash
+gcloud run deploy floramedica-pro \
+  --source . \
+  --region asia-southeast1 \
+  --allow-unauthenticated \
+  --port 3000 \
+  --set-env-vars="NODE_ENV=production"
 ```
 
 ---

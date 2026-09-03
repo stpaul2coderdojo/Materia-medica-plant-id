@@ -1,0 +1,40 @@
+# Stage 1: Build the React frontend and bundle the Express server
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy dependency specifications
+COPY package*.json ./
+
+# Install all dependencies (including devDependencies needed for build)
+RUN npm ci
+
+# Copy the complete source code
+COPY . .
+
+# Build the Vite SPA and esbuild backend bundle (outputs to /app/dist)
+RUN npm run build
+
+# Stage 2: Minimal Production Image
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Copy package manifests and install only production dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy compiled artifacts from builder stage
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/docs ./docs
+COPY --from=builder /app/doc ./doc
+
+# Container listens on port 3000
+EXPOSE 3000
+
+# Run the bundled standalone CommonJS server
+CMD ["node", "dist/server.cjs"]
